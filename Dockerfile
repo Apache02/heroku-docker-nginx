@@ -1,9 +1,9 @@
 FROM alpine:latest
 
-RUN apk add --no-cache ca-certificates git nginx
+RUN apk add --no-cache gettext ca-certificates git nginx
 
 COPY ./linux_root/ /
 
-EXPOSE 80
+RUN chmod +x /opt/*
 
-CMD nginx -c /etc/nginx/nginx.conf -g 'daemon off;'
+CMD /opt/init.sh && nginx -c /etc/nginx/nginx.conf -g 'daemon off;'
